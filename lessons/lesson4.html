@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 4 课：合并的艺术 - Git 故事会</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../styles/main.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script defer src="../scripts/main.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div class="container mx-auto p-4 md:p-8">
+    <header class="mb-6 flex items-center justify-between">
+      <a href="../index.html" class="text-indigo-600 hover:underline">← 返回首页</a>
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-800">第 4 课：合并的艺术</h1>
+      <div></div>
+    </header>
+
+    <div class="two-cols">
+      <div class="left-panel">
+        <section>
+          <h2>故事场景</h2>
+          <div class="character-intro">
+            <p>节日主题页面开发进展顺利，但主分支 <code>main</code> 上也有一些热修复。张三说："是时候把我们的成果合并回主线了，但要小心冲突。"</p>
+            <p>李四问："冲突是什么？"张三解释："当两个人同时改了同一段文字，Git 不知道选谁的，就需要我们做裁判。"</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>三明治教学法：合并与冲突</h2>
+          <div class="step" data-state="merge">
+            <h4>步骤一：将 feature 分支合并到 main</h4>
+            <p><strong>故事：为什么需要它？</strong></p>
+            <p>新功能完成后需要上线，合并就是把分支的成果纳入主线历史。</p>
+
+            <p><strong>命令解释：它是什么？</strong></p>
+            <pre><code>git checkout main
+git merge feature/user-interface</code></pre>
+            <p><code>git merge</code>：把另一个分支的提交引入当前分支，生成一个合并提交（或快速合并）。</p>
+
+            <p><strong>总结：它解决了什么根本问题？</strong></p>
+            <p>将分支上的工作正规地归档到主线，形成一致的项目历史。</p>
+          </div>
+
+          <div class="step" data-state="conflict">
+            <h4>步骤二：冲突示意与解决</h4>
+            <p><strong>故事：为什么需要它？</strong></p>
+            <p>当 main 和 feature 都改了 README 的同一行，Git 无法自动判断，开发者需要手动选择保留的内容。</p>
+
+            <p><strong>命令解释：它是什么？</strong></p>
+            <pre><code># 解决冲突后：
+git add .
+git commit</code></pre>
+            <p>手动编辑冲突标记后，<code>git add</code> 标记为已解决，<code>git commit</code> 记录合并结果。</p>
+
+            <p><strong>总结：它解决了什么根本问题？</strong></p>
+            <p>在多人协作中建立确定性的历史，确保主线内容清晰一致。</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>知识点总结</h2>
+          <ul>
+            <li><code>git merge</code> 将分支更改合入当前分支，可能生成合并提交</li>
+            <li>冲突是协作中的常态，通过人工决策让历史更准确</li>
+          </ul>
+        </section>
+
+        <div class="mt-8 flex justify-between">
+          <a href="./lesson3.html" class="nav-button">← 上一课：分支的奥秘</a>
+          <a href="./lesson5.html" class="nav-button">下一课：时间旅行者 →</a>
+        </div>
+      </div>
+      <div class="right-panel">
+        <div id="git-graph-container" class="git-graph"></div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const gitStates = {
+          initial: `gitGraph\n  commit id: \"c1\" msg: \"Initial commit\"\n  branch feature/user-interface\n  checkout feature/user-interface\n  commit id: \"c2\" msg: \"Add UI components\"`,
+          merge: `gitGraph\n  commit id: \"c1\" msg: \"Initial commit\"\n  branch feature/user-interface\n  checkout feature/user-interface\n  commit id: \"c2\" msg: \"Add UI components\"\n  checkout main\n  merge feature/user-interface`,
+          conflict: `gitGraph\n  commit id: \"c1\" msg: \"Initial commit\"\n  branch feature/user-interface\n  checkout feature/user-interface\n  commit id: \"c2\" msg: \"Add UI components\"\n  checkout main\n  commit id: \"c3\" msg: \"Change same line\"\n  checkout feature/user-interface\n  commit id: \"c4\" msg: \"Change same line too\"`,
+        };
+        initializeApp(gitStates);
+      });
+    </script>
+  </div>
+</body>
+</html>

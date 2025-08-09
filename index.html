@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git 故事会 - 沉浸式学习 Git</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-gray-800 mb-4">
+                🎯 Git 故事会
+            </h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                跟随"代码大陆"三人团队的协作故事，零基础掌握 Git 版本控制
+            </p>
+            <div class="mt-6 p-4 bg-white rounded-lg shadow-md max-w-3xl mx-auto">
+                <h2 class="text-lg font-semibold text-gray-700 mb-2">🎭 故事主角</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-blue-500 rounded-full mx-auto mb-2 flex items-center justify-center text-white font-bold">张</div>
+                        <p class="font-medium">张三 - 项目组长</p>
+                        <p class="text-gray-500">经验丰富的导师</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-green-500 rounded-full mx-auto mb-2 flex items-center justify-center text-white font-bold">李</div>
+                        <p class="font-medium">李四 - 前端新人</p>
+                        <p class="text-gray-500">懂基础但对分支困惑</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-orange-500 rounded-full mx-auto mb-2 flex items-center justify-center text-white font-bold">蛋</div>
+                        <p class="font-medium">狗蛋 - 后端实习生</p>
+                        <p class="text-gray-500">Git 零基础学习者</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+                    📚 课程目录
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <a href="lessons/lesson1.html" class="lesson-card group">
+                        <div class="lesson-number">01</div>
+                        <div class="lesson-content">
+                            <h3 class="lesson-title">项目的诞生与启航</h3>
+                            <p class="lesson-desc">学习 git init、add、commit 基础操作</p>
+                            <div class="lesson-tags">
+                                <span class="tag">git init</span>
+                                <span class="tag">git add</span>
+                                <span class="tag">git commit</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="lessons/lesson2.html" class="lesson-card group">
+                        <div class="lesson-number">02</div>
+                        <div class="lesson-content">
+                            <h3 class="lesson-title">连接远程仓库</h3>
+                            <p class="lesson-desc">学习 remote、push、pull 操作</p>
+                            <div class="lesson-tags">
+                                <span class="tag">git remote</span>
+                                <span class="tag">git push</span>
+                                <span class="tag">git pull</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="lessons/lesson3.html" class="lesson-card group">
+                        <div class="lesson-number">03</div>
+                        <div class="lesson-content">
+                            <h3 class="lesson-title">分支的奥秘</h3>
+                            <p class="lesson-desc">理解分支概念，学习 branch、checkout</p>
+                            <div class="lesson-tags">
+                                <span class="tag">git branch</span>
+                                <span class="tag">git checkout</span>
+                                <span class="tag">git switch</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="lessons/lesson4.html" class="lesson-card group">
+                        <div class="lesson-number">04</div>
+                        <div class="lesson-content">
+                            <h3 class="lesson-title">合并的艺术</h3>
+                            <p class="lesson-desc">学习 merge、处理冲突</p>
+                            <div class="lesson-tags">
+                                <span class="tag">git merge</span>
+                                <span class="tag">冲突解决</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="lessons/lesson5.html" class="lesson-card group">
+                        <div class="lesson-number">05</div>
+                        <div class="lesson-content">
+                            <h3 class="lesson-title">时间旅行者</h3>
+                            <p class="lesson-desc">学习 reset、revert、log</p>
+                            <div class="lesson-tags">
+                                <span class="tag">git reset</span>
+                                <span class="tag">git revert</span>
+                                <span class="tag">git log</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="lessons/lesson6.html" class="lesson-card group">
+                        <div class="lesson-number">06</div>
+                        <div class="lesson-content">
+                            <h3 class="lesson-title">团队协作流程</h3>
+                            <p class="lesson-desc">学习 Pull Request、代码审查</p>
+                            <div class="lesson-tags">
+                                <span class="tag">Pull Request</span>
+                                <span class="tag">Code Review</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="lessons/lesson7.html" class="lesson-card group">
+                        <div class="lesson-number">07</div>
+                        <div class="lesson-content">
+                            <h3 class="lesson-title">高级技巧与最佳实践</h3>
+                            <p class="lesson-desc">学习 rebase、stash、gitignore</p>
+                            <div class="lesson-tags">
+                                <span class="tag">git rebase</span>
+                                <span class="tag">git stash</span>
+                                <span class="tag">.gitignore</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="mt-8 p-6 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                    <h3 class="text-lg font-semibold text-blue-800 mb-2">💡 学习提示</h3>
+                    <ul class="text-blue-700 space-y-1">
+                        <li>• 每节课都有交互式可视化图表，帮助你"看到"Git的操作</li>
+                        <li>• 点击左侧的步骤，右侧会显示对应的Git分支状态</li>
+                        <li>• 建议按顺序学习，每节课都建立在前面的基础之上</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+
+        <footer class="text-center mt-12 text-gray-600">
+            <p>&copy; 2024 Git 故事会 - 让版本控制变得有趣易懂</p>
+        </footer>
+    </div>
+</body>
+</html>

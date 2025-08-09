@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 2 课：连接远程仓库 - Git 故事会</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../styles/main.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script defer src="../scripts/main.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div class="container mx-auto p-4 md:p-8">
+    <header class="mb-6 flex items-center justify-between">
+      <a href="../index.html" class="text-indigo-600 hover:underline">← 返回首页</a>
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-800">第 2 课：连接远程仓库</h1>
+      <div></div>
+    </header>
+
+    <div class="two-cols">
+      <div class="left-panel">
+        <section>
+          <h2>故事场景</h2>
+          <div class="character-intro">
+            <p>项目启动的第二天，张三拿起咖啡杯，对团队说："昨天我们在本地创建了仓库，就像是在自己的工作台上整理了工具箱。但是，如果只有你一个人知道这些宝贵的代码，那团队怎么协作呢？"</p>
+            <p>李四疑惑地问："那怎么大家都都能看到我的代码呢？"</p>
+            <p>张三笑道："这就需要一个<strong>远程仓库</strong>了，就像是团队共享的代码保险柜。我把本地的代码'推送'到 GitHub 上，这样每个人都能访问最新版本。"</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>三明治教学法：连接远程世界</h2>
+          
+          <div class="step" data-state="connect">
+            <h4>步骤一：添加远程 origin</h4>
+            <p><strong>故事：为什么需要它？</strong></p>
+            <p>想象一下，你在家里写了一本精彩的小说，但如果不把它分享到网上，全世界的读者怎么能看到呢？远程仓库就是代码的"出版社"。</p>
+            
+            <p><strong>命令解释：它是什么？</strong></p>
+            <pre><code>git remote add origin https://github.com/yourname/what-to-eat-today.git</code></pre>
+            <p><code>git remote add</code>：告诉 Git "嘿，我要添加一个远程仓库地址"</p>
+            <p><code>origin</code>：这是远程仓库的"昵称"，就像给朋友起外号一样</p>
+            <p><code>URL</code>：远程仓库的具体地址，就像朋友的家庭住址</p>
+            
+            <p><strong>总结：它解决了什么根本问题？</strong></p>
+            <p>解决了"代码孤岛"问题，让本地代码能够与远程服务器建立连接，为团队协作铺平道路。</p>
+          </div>
+          
+          <div class="step" data-state="push">
+            <h4>步骤二：推送到 main 分支</h4>
+            <p><strong>故事：为什么需要它？</strong></p>
+            <p>李四说："已经添加了远程地址，但我的代码还在本地啊？"张三解释："就像写好信件还要投递到邮箱一样，我们需要'推送'代码到远程仓库。"</p>
+            
+            <p><strong>命令解释：它是什么？</strong></p>
+            <pre><code>git branch -M main
+git push -u origin main</code></pre>
+            <p><code>git branch -M main</code>：确保当前分支名为 main（重命名分支）</p>
+            <p><code>git push</code>：把本地提交"推送"到远程仓库</p>
+            <p><code>-u origin main</code>：设置上游分支，建立本地 main 与远程 main 的追踪关系</p>
+            
+            <p><strong>总结：它解决了什么根本问题？</strong></p>
+            <p>解决了代码"传输"问题，让本地修改能同步到团队共享的远程仓库，实现真正的代码共享。</p>
+          </div>
+          
+          <div class="step" data-state="pull">
+            <h4>步骤三：拉取更新</h4>
+            <p><strong>故事：为什么需要它？</strong></p>
+            <p>第三天，王五也加入了项目。他修改了一些代码并推送了。李四问："我怎么获取王五的最新修改呢？"张三回答："用 <code>git pull</code> 把远程的最新代码'拉取'到本地。"</p>
+            
+            <p><strong>命令解释：它是什么？</strong></p>
+            <pre><code>git pull</code></pre>
+            <p><code>git pull</code>：从远程仓库获取最新代码并合并到本地分支</p>
+            <p>实际上等于：<code>git fetch + git merge</code></p>
+            
+            <p><strong>总结：它解决了什么根本问题？</strong></p>
+            <p>解决了代码"同步"问题，确保本地代码与团队最新进展保持一致，避免开发基于过时版本。</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>知识点总结</h2>
+          <ul>
+            <li><code>git remote add origin URL</code>：为本地仓库添加远程仓库地址，建立连接桥梁</li>
+            <li><code>git push -u origin main</code>：首次推送本地代码到远程，并建立追踪关系</li>
+            <li><code>git pull</code>：从远程拉取最新代码到本地，保持同步</li>
+            <li><strong>核心理念</strong>：远程仓库是团队协作的中心枢纽，所有人通过推送和拉取实现代码共享</li>
+          </ul>
+        </section>
+
+        <!-- 底部导航：上一课/下一课 -->
+        <div class="mt-8 flex justify-between">
+          <a href="./lesson1.html" class="nav-button">← 上一课：项目诞生</a>
+          <a href="./lesson3.html" class="nav-button">下一课：分支的奥秘 →</a>
+        </div>
+      </div>
+      
+      <div class="right-panel">
+        <div id="git-graph-container" class="git-graph"></div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const gitStates = {
+          initial: `gitGraph\n  commit id: \"c1\" msg: \"Initial commit\"` ,
+          connect: `gitGraph\n  commit id: \"c1\" msg: \"Initial commit\"\n  branch origin/main`,
+          push: `gitGraph\n  commit id: \"c1\" msg: \"Initial commit\"\n  branch origin/main\n  checkout main\n  commit id: \"c2\" msg: \"Push to origin\"\n  merge origin/main`,
+          pull: `gitGraph\n  commit id: \"c1\" msg: \"Initial commit\"\n  branch origin/main\n  checkout main\n  commit id: \"c2\" msg: \"Local changes\"\n  checkout origin/main\n  commit id: \"r2\" msg: \"Remote changes\"`,
+        };
+        initializeApp(gitStates);
+      });
+    </script>
+  </div>
+</body>
+</html>

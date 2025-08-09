@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 5 课：时间旅行者 - Git 故事会</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../styles/main.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script defer src="../scripts/main.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div class="container mx-auto p-4 md:p-8">
+    <header class="mb-6 flex items-center justify-between">
+      <a href="../index.html" class="text-indigo-600 hover:underline">← 返回首页</a>
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-800">第 5 课：时间旅行者</h1>
+      <div></div>
+    </header>
+
+    <div class="two-cols">
+      <div class="left-panel">
+        <section>
+          <h2>故事场景</h2>
+          <div class="character-intro">
+            <p>上线前夜，测试同学发现了一个回归 BUG。张三说："别慌，我们先看看历史，找出问题是从哪个提交开始的。必要时，我们可以回到过去的某个节点。"</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>三明治教学法：查看与回到历史</h2>
+
+          <div class="step" data-state="log">
+            <h4>步骤一：查看提交历史</h4>
+            <p><strong>故事：为什么需要它？</strong></p>
+            <p>快速定位引入问题的提交，就像查阅项目的年轮。</p>
+
+            <p><strong>命令解释：它是什么？</strong></p>
+            <pre><code>git log --oneline --graph</code></pre>
+            <p><code>--oneline</code> 将提交精简为一行；<code>--graph</code> 使用 ASCII 图形显示分支结构。</p>
+
+            <p><strong>总结：它解决了什么根本问题？</strong></p>
+            <p>帮助我们建立对历史的宏观认知，快速定位问题区间。</p>
+          </div>
+
+          <div class="step" data-state="reset">
+            <h4>步骤二：重置到之前的提交</h4>
+            <p><strong>故事：为什么需要它？</strong></p>
+            <p>当确认最近一两个提交有明显问题时，重置能迅速回退到稳定点（注意破坏性）。</p>
+
+            <p><strong>命令解释：它是什么？</strong></p>
+            <pre><code>git reset --hard HEAD~1</code></pre>
+            <p><code>--hard</code> 会重置工作区、暂存区与 HEAD 指针，一起回到目标提交。</p>
+
+            <p><strong>总结：它解决了什么根本问题？</strong></p>
+            <p>在紧急情况下快速回到稳定版本，代价是丢失未保存的更改。</p>
+          </div>
+
+          <div class="step" data-state="revert">
+            <h4>步骤三：安全的撤销方式</h4>
+            <p><strong>故事：为什么需要它？</strong></p>
+            <p>如果线上已经包含了错误提交，不能直接改历史，这时需要用 <code>revert</code> 生成一个新的反向提交来撤销。</p>
+
+            <p><strong>命令解释：它是什么？</strong></p>
+            <pre><code>git revert HEAD</code></pre>
+            <p>会基于当前状态生成一个反向操作的提交，保持历史的可追溯与安全性。</p>
+
+            <p><strong>总结：它解决了什么根本问题？</strong></p>
+            <p>在保护历史一致性的前提下，撤销错误，引导我们使用更安全的协作方式。</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>知识点总结</h2>
+          <ul>
+            <li><code>git log --oneline --graph</code>：快速浏览历史结构</li>
+            <li><code>git reset --hard</code>：暴力回退，谨慎使用</li>
+            <li><code>git revert</code>：安全撤销，推荐在共享分支使用</li>
+          </ul>
+        </section>
+
+        <div class="mt-8 flex justify-between">
+          <a href="./lesson4.html" class="nav-button">← 上一课：合并的艺术</a>
+          <a href="./lesson6.html" class="nav-button">下一课：团队协作流程 →</a>
+        </div>
+      </div>
+      <div class="right-panel">
+        <div id="git-graph-container" class="git-graph"></div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const gitStates = {
+          initial: `gitGraph\n  commit id: \"c1\" msg: \"Initial commit\"\n  commit id: \"c2\" msg: \"Add feature\"\n  commit id: \"c3\" msg: \"Bug introduced\"`,
+          log: `gitGraph\n  commit id: \"c1\" msg: \"Initial commit\"\n  commit id: \"c2\" msg: \"Add feature\"\n  commit id: \"c3\" msg: \"Bug introduced\"`,
+          reset: `gitGraph\n  commit id: \"c1\" msg: \"Initial commit\"\n  commit id: \"c2\" msg: \"Add feature\"`,
+          revert: `gitGraph\n  commit id: \"c1\" msg: \"Initial commit\"\n  commit id: \"c2\" msg: \"Add feature\"\n  commit id: \"c3\" msg: \"Bug introduced\"\n  commit id: \"c4\" msg: \"Revert bug\" type: REVERSE`,
+        };
+        initializeApp(gitStates);
+      });
+    </script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 1 课：项目的诞生与启航 - Git 故事会</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../styles/main.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script defer src="../scripts/main.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div class="container mx-auto p-4 md:p-8">
+    <header class="mb-6 flex items-center justify-between">
+      <a href="../index.html" class="text-indigo-600 hover:underline">← 返回首页</a>
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-800">第 1 课：项目的诞生与启航</h1>
+      <div></div>
+    </header>
+
+    <div class="two-cols">
+      <div class="left-panel">
+        <section>
+          <h2>故事场景</h2>
+          <p>
+            “代码大陆”公司的小会议室里，张三拍了拍桌子：“各位，我们的第一个产品——<strong>今天吃什么 (what-to-eat-today)</strong> 项目，今天正式启动！从现在起，我们的每一行代码都要被妥善地记录和管理。我们将使用 Git 和 GitHub 来协作。”
+          </p>
+          <p>
+            李四点点头：“我之前用过 <code>git add</code> 和 <code>git commit</code>，但分支和远程仓库总是有点迷糊。” 狗蛋则一脸紧张：“我还没用过 Git，这东西难不难？”
+          </p>
+          <p>
+            张三笑了笑：“别急，我们一步一步来。今天我们要做三件事：创建项目文件夹、初始化 Git 仓库、完成第一次提交。”
+          </p>
+        </section>
+
+        <section>
+          <h2>张三的指导</h2>
+          <p>
+            Git 分为<strong>本地仓库</strong>和<strong>远程仓库</strong>。本地仓库是在你电脑上的历史记录，远程仓库（比如 GitHub）是团队共享的地方。我们先从本地仓库开始，等内容准备好后再连接到远程。
+          </p>
+          <p>
+            为什么要<strong>初始化</strong>？因为一个普通文件夹默认没有版本历史。只有运行 <code>git init</code>，Git 才会在这个文件夹里创建一个隐藏目录 <code>.git</code>，它负责记录所有提交、分支和元数据，让你的项目“有记忆”。
+          </p>
+        </section>
+
+        <section>
+          <h2>操作步骤</h2>
+
+          <div class="step" data-state="initial">
+            <h4>步骤一：在本地创建项目文件夹</h4>
+            <p>首先，我们在电脑上创建一个项目文件夹，并进入该目录：</p>
+            <pre><code>mkdir what-to-eat-today
+cd what-to-eat-today</code></pre>
+          </div>
+
+          <div class="step" data-state="init">
+            <h4>步骤二：初始化 Git 仓库</h4>
+            <p>现在，我们用 <code>git init</code> 命令，把这个普通的文件夹变成一个 Git 能管理的仓库：</p>
+            <p><strong>命令解释:</strong> <code>git init</code> 会在当前目录下创建一个隐藏文件夹 <code>.git</code>，Git 会把所有历史和对象都保存在这里。</p>
+            <pre><code>git init</code></pre>
+            <p><strong>终端输出:</strong></p>
+            <pre><code>Initialized empty Git repository in /path/to/what-to-eat-today/.git/</code></pre>
+          </div>
+
+          <div class="step" data-state="commit1">
+            <h4>步骤三：创建项目文件并进行首次提交</h4>
+            <p>我们来创建一个 <code>README.md</code> 文件，然后进行第一次提交：</p>
+            <pre><code>touch README.md
+git add README.md
+git commit -m "Initial commit: Add README file"</code></pre>
+            <p><strong>命令解释:</strong> <code>git add</code> 将工作区的更改放到暂存区，<code>git commit</code> 则是把暂存区内容永久写入历史，形成一个“快照”。</p>
+          </div>
+
+          <!-- 移除原来的“下节课预告”块 -->
+        </section>
+
+        <section>
+          <h2>知识点总结</h2>
+          <ul>
+            <li><code>git init</code>：把普通文件夹变成 Git 仓库，创建 .git 目录</li>
+            <li><code>git add</code>：将更改放入暂存区，为提交做准备</li>
+            <li><code>git commit</code>：将暂存区内容写入历史，形成一个不可变快照</li>
+          </ul>
+        </section>
+
+        <!-- 底部导航：上一课/下一课 -->
+        <div class="mt-8 flex justify-between">
+          <a href="../index.html" class="nav-button">← 上一课（返回首页）</a>
+          <a href="./lesson2.html" class="nav-button">下一课：连接远程仓库 →</a>
+        </div>
+      </div>
+
+      <div class="right-panel">
+        <div id="git-graph-container" class="git-graph"></div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const gitStates = {
+          // 一个空的图：仅展示起始状态
+          initial: `gitGraph\n  commit id: "start" msg: "创建文件夹"`,
+          // Git 初始化状态
+          init: `gitGraph\n  commit id: "init" msg: "git init 初始化" type: REVERSE`,
+          // 第一次提交
+          commit1: `gitGraph\n  commit id: "c1" msg: "初次提交: README"`
+        };
+        initializeApp(gitStates);
+      });
+    </script>
+  </div>
+</body>
+</html>

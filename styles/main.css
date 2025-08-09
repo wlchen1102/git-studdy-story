@@ -1,0 +1,162 @@
+/* ===== 全局样式 ===== */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  background-color: #f9fafb;
+  color: #111827;
+}
+
+/* ===== 首页卡片样式（带背景色与悬浮效果） ===== */
+.lesson-card {
+  background: linear-gradient(135deg, #eef2ff 0%, #ffffff 60%);
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+.lesson-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px rgba(79, 70, 229, 0.15);
+  border-color: #818cf8;
+  background: linear-gradient(135deg, #e0e7ff 0%, #ffffff 60%);
+}
+.lesson-number {
+  font-size: 1.75rem; /* ~text-3xl */
+  font-weight: 800;
+  color: #4f46e5; /* indigo-600 */
+  margin-bottom: 8px;
+}
+.lesson-title {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 600;
+  color: #1f2937; /* gray-800 */
+  margin-bottom: 8px;
+  transition: color 0.2s ease;
+}
+.lesson-card:hover .lesson-title {
+  color: #4f46e5;
+}
+.lesson-desc { color: #4b5563; margin-bottom: 16px; }
+.lesson-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  background: #f3f4f6; /* gray-100 */
+  color: #374151; /* gray-700 */
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875rem;
+}
+
+/* ===== 课程页面布局：两栏 ===== */
+.two-cols { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+@media (min-width: 1024px) {
+  .two-cols { grid-template-columns: 1fr 1fr; }
+}
+
+.left-panel, .right-panel {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(17, 24, 39, 0.06);
+  padding: 24px;
+}
+@media (min-width: 1024px) {
+  .left-panel { padding: 32px; }
+  .right-panel { padding: 32px; position: sticky; top: 2rem; height: fit-content; }
+}
+
+/* ===== 左侧内容样式 ===== */
+.left-panel h2 { font-size: 1.5rem; font-weight: 800; color: #1f2937; margin: 0 0 12px; padding-bottom: 8px; border-bottom: 2px solid #c7d2fe; }
+.left-panel h3 { font-size: 1.25rem; font-weight: 700; color: #374151; margin: 0 0 12px; }
+.left-panel h4 { font-size: 1.125rem; font-weight: 700; color: #374151; margin: 0 0 8px; }
+.left-panel p { color: #374151; margin: 0 0 16px; }
+.left-panel ul { list-style: disc inside; color: #374151; margin-left: 1rem; }
+.left-panel li { margin-bottom: 8px; }
+
+/* ===== 代码样式 ===== */
+pre {
+  background: #111827; /* gray-900 */
+  color: #34d399; /* green-400 */
+  padding: 16px;
+  border-radius: 10px;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+code {
+  background: #f3f4f6;
+  color: #1f2937;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875rem;
+}
+pre code { background: transparent; color: #34d399; padding: 0; }
+
+/* ===== 交互步骤样式 ===== */
+.step {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+}
+.step:hover { background: #eef2ff; border-color: #6366f1; box-shadow: 0 8px 16px rgba(99, 102, 241, 0.15); }
+.step.active { background: #eef2ff; border-color: #4f46e5; box-shadow: 0 8px 16px rgba(99, 102, 241, 0.2); }
+.step h4 { font-size: 1.125rem; font-weight: 700; color: #4338ca; margin: 0 0 12px; display: flex; align-items: center; }
+.step h4::before { content: "👆"; margin-right: 8px; }
+.step.active h4::before { content: "✅"; }
+
+/* ===== Git 图表容器 ===== */
+.git-graph {
+  min-height: 24rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #d1d5db; /* gray-300 */
+  border-radius: 12px;
+  background: #f9fafb; /* gray-50 */
+}
+.git-graph svg { width: 100%; height: auto; max-width: 100%; }
+
+/* ===== 响应式调整 ===== */
+@media (max-width: 1024px) {
+  .right-panel { position: static; top: auto; }
+}
+
+/* ===== 特殊元素 ===== */
+.character-intro { background: linear-gradient(90deg, #eff6ff, #eef2ff); border-left: 4px solid #818cf8; padding: 16px; border-radius: 0 10px 10px 0; margin-bottom: 16px; }
+.tip-box { background: #fffbeb; border: 1px solid #fef3c7; border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.warning-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.success-box { background: #ecfdf5; border: 1px solid #bbf7d0; border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+
+/* ===== 小动画 ===== */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.step { animation: fadeIn 0.3s ease-out; }
+
+/* ===== Mermaid 优化 ===== */
+#git-graph-container .mermaid { display: flex; justify-content: center; align-items: center; }
+#git-graph-container svg { max-width: 100%; height: auto; min-height: 200px; }
+
+/* ===== 通用按钮 ===== */
+.nav-button { background: #4f46e5; color: #fff; padding: 8px 16px; border-radius: 10px; transition: background 0.2s ease, transform 0.2s ease; display: inline-block; }
+.nav-button:hover { background: #4338ca; transform: translateY(-1px); }
+
+/* ===== 课程页顶栏吸附（Sticky Header） ===== */
+.container > header.mb-6.flex {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(249, 250, 251, 0.85); /* 与 body 背景相近，并带点透明 */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(17, 24, 39, 0.06);
+  padding-top: 12px;
+  padding-bottom: 12px;
+}

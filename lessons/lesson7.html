@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 7 课：高级技巧与最佳实践 - Git 故事会</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../styles/main.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script defer src="../scripts/main.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div class="container mx-auto p-4 md:p-8">
+    <header class="mb-6 flex items-center justify-between">
+      <a href="../index.html" class="text-indigo-600 hover:underline">← 返回首页</a>
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-800">第 7 课：高级技巧与最佳实践</h1>
+      <div></div>
+    </header>
+
+    <div class="two-cols">
+      <div class="left-panel">
+        <section>
+          <h2>故事场景</h2>
+          <div class="character-intro">
+            <p>随着项目规模扩大，历史线变得曲折复杂。张三宣布："我们要学一些高级技巧来保持历史整洁、开发高效。"</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>三明治教学法：rebase / stash / .gitignore</h2>
+
+          <div class="step" data-state="rebase">
+            <h4>步骤一：变基 rebase</h4>
+            <p><strong>故事：为什么需要它？</strong></p>
+            <p>在多人开发时，分支历史会像"多叉树"一样发散。rebase 可以让你的分支基于最新的 main，形成更直的历史。</p>
+
+            <p><strong>命令解释：它是什么？</strong></p>
+            <pre><code>git rebase main</code></pre>
+            <p>将当前分支提交"搬运"到 main 最新提交之后，形成线性历史（注意与 merge 的差异）。</p>
+
+            <p><strong>总结：它解决了什么根本问题？</strong></p>
+            <p>降低历史分叉，提升可读性，便于 bisect 和审查。</p>
+          </div>
+
+          <div class="step" data-state="stash">
+            <h4>步骤二：临时保存工作区</h4>
+            <p><strong>故事：为什么需要它？</strong></p>
+            <p>当你本地改到一半需要去修复紧急 bug，又不想提交半成品时，用 stash 暂时把改动放进抽屉。</p>
+
+            <p><strong>命令解释：它是什么？</strong></p>
+            <pre><code>git stash
+git stash pop</code></pre>
+            <p><code>stash</code> 会把当前未提交的改动快照保存并清理工作区；<code>pop</code> 取回并应用。</p>
+
+            <p><strong>总结：它解决了什么根本问题？</strong></p>
+            <p>帮助我们在任务切换时保持工作区整洁，避免临时提交污染历史。</p>
+          </div>
+
+          <div class="step" data-state="ignore">
+            <h4>步骤三：忽略不需要追踪的文件</h4>
+            <p><strong>故事：为什么需要它？</strong></p>
+            <p>构建产物、依赖目录不应进入版本控制，否则会引发合并冲突和冗余。</p>
+
+            <p><strong>命令解释：它是什么？</strong></p>
+            <pre><code>echo node_modules/ >> .gitignore</code></pre>
+            <p>把无需追踪的路径写入 .gitignore，让历史更干净。</p>
+
+            <p><strong>总结：它解决了什么根本问题？</strong></p>
+            <p>避免无意义文件进入版本库，提升仓库性能与协作效率。</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>知识点总结</h2>
+          <ul>
+            <li><code>rebase</code> 让历史更直但会改写提交，谨慎用于共享分支</li>
+            <li><code>stash</code> 支持任务快速切换</li>
+            <li><code>.gitignore</code> 保持仓库清爽</li>
+          </ul>
+        </section>
+
+        <div class="mt-8 flex justify-between">
+          <a href="./lesson6.html" class="nav-button">← 上一课：团队协作流程</a>
+          <a href="../index.html" class="nav-button">回到首页 →</a>
+        </div>
+      </div>
+      <div class="right-panel">
+        <div id="git-graph-container" class="git-graph"></div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const gitStates = {
+          initial: `gitGraph\n  commit id: \"c1\" msg: \"Initial commit\"\n  branch featureX\n  checkout featureX\n  commit id: \"c2\" msg: \"Work on feature\"`,
+          rebase: `gitGraph\n  commit id: \"c1\" msg: \"Initial commit\"\n  branch featureX\n  checkout featureX\n  commit id: \"c2\" msg: \"Work on feature\"\n  checkout main\n  commit id: \"c3\" msg: \"New base\"\n  checkout featureX`,
+          stash: `gitGraph\n  commit id: \"c1\" msg: \"Initial commit\"\n  branch featureX\n  checkout featureX\n  commit id: \"c2\" msg: \"Work on feature\"`,
+          ignore: `gitGraph\n  commit id: \"c1\" msg: \"Initial commit\"`,
+        };
+        initializeApp(gitStates);
+      });
+    </script>
+  </div>
+</body>
+</html>
