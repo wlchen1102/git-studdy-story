@@ -42,6 +42,32 @@
   // - 绑定左侧步骤点击事件
   // - 默认渲染 initial 状态
   function initializeApp(gitStates) {
+    // 1) 代码块增强：为所有 <pre><code> 添加复制按钮与 Mac 风格
+    try {
+      document.querySelectorAll('pre').forEach((pre) => {
+        // 如果已经有按钮，避免重复添加
+        if (pre.querySelector('.copy-button')) return;
+        const btn = document.createElement('button');
+        btn.className = 'copy-button';
+        btn.type = 'button';
+        btn.textContent = '复制';
+        btn.addEventListener('click', async () => {
+          const codeEl = pre.querySelector('code');
+          const text = codeEl ? codeEl.innerText : pre.innerText;
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = '复制'; btn.classList.remove('copied'); }, 1500);
+          } catch (e) {
+            btn.textContent = '复制失败';
+            setTimeout(() => { btn.textContent = '复制'; }, 1500);
+          }
+        });
+        pre.appendChild(btn);
+      });
+    } catch (e) { /* no-op */ }
+
     // 委托事件：为 .step 元素绑定点击
     document.addEventListener('click', (e) => {
       const target = e.target.closest('.step');

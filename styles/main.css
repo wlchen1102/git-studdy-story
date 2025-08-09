@@ -159,4 +159,74 @@ pre code { background: transparent; color: #34d399; padding: 0; }
   box-shadow: 0 2px 8px rgba(17, 24, 39, 0.06);
   padding-top: 12px;
   padding-bottom: 12px;
+  margin-left: -1rem; /* 向左扩展，抵消容器内边距 */
+  margin-right: -1rem; /* 向右扩展，抵消容器内边距 */
+  padding-left: 3rem; /* 左内边距，让返回按钮与内容对齐 */
+  padding-right: 3rem; /* 右内边距，保持对称 */
+}
+
+/* ===== 代码块 Mac 风格与复制按钮增强 ===== */
+pre {
+  background: #111827; /* gray-900 */
+  color: #34d399; /* green-400 */
+  padding: 16px;
+  border-radius: 10px;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+/* Mac 风格代码块标题栏 */
+pre::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff5f56; /* 红色圆点 */
+  box-shadow: 
+    20px 0 0 #ffbd2e, /* 黄色圆点 */
+    40px 0 0 #27ca3f; /* 绿色圆点 */
+}
+
+/* 复制按钮 */
+.copy-button {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #d1d5db;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.copy-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.copy-button.copied {
+  background: rgba(52, 211, 153, 0.2);
+  color: #34d399;
+  border-color: rgba(52, 211, 153, 0.3);
+}
+
+/* 为代码块内容留出顶部空间 */
+pre code {
+  background: transparent;
+  color: #34d399;
+  padding: 0;
+  margin-top: 20px;
+  display: block;
 }
